@@ -1,0 +1,54 @@
+﻿<h2>REGISTER</h2>
+<style>
+    label.error{color: red;}
+</style>
+<form id="frmRegister">
+    <div>
+        Username: <input name="username" />
+    </div>
+    <div>
+        Email: <input name="email" />
+    </div>
+    <div>
+        Confirm Email: <input name="confirmEmail" />
+    </div>
+    <div>
+        Hình chân dung: <input type="file" name="hinh" />
+    </div>
+    <div>Số TC: <input name="sotc" /></div>
+    <div>Điểm số: <input name="diem" /></div>
+    <button>REGISTER</button>
+</form>
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script>
+        //B1: Định nghĩa hàm kiểm tra
+        function laMailDhsp(value, element){
+            let pattern = /^[1-9]\d{9}@@student.hcmue.edu.vn$/;
+            return pattern.test(value) || this.optional(element);
+        }
+        //B2: Đăng ký thêm phương thức kiếm tra
+        $.validator.addMethod('hcmueemail', laMailDhsp,
+            'Phải là email sinh viên');
+
+        $(document).ready(function(){
+            $("#frmRegister").validate({
+                rules:{
+                    sotc:{ digits: true},
+                    diem: {number: true, range: [0, 10]},
+                    username: {required: true},
+                    email: { email: true, hcmueemail : true},
+                    hinh: { extension: "png|jpg|gif"}
+                },
+                messages:{
+                    sotc: { digits: "Số nguyên" },
+                    diem: { number: "Số thực", range: "Điểm từ 0 --> 10" },
+                    username: { required: "Chưa nhập" },
+                    hinh: { extension: "Chấp nhận file png|jpg|gif" }
+                }
+            });
+        });
+    </script>
+}

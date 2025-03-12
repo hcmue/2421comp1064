@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @await RenderSectionAsync("MyStyles", required: false)
+</head>
+<body>
+    <div class="container">
+        <header>#HEADER</header>
+        <div class="row">
+            <div class="col-9">
+                @RenderBody()
+            </div>
+            <aside class="col-3">#MENU</aside>
+        </div>        
+        <footer>#FOTTER</footer>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    @RenderSection("MyScripts", required: false)
+</body>
+</html>

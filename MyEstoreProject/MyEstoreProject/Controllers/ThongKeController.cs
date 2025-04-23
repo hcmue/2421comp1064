@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MyEstoreProject.Entities;
 
 namespace MyEstoreProject.Controllers
@@ -42,6 +43,7 @@ namespace MyEstoreProject.Controllers
             return Json(data);
         }
 
+        [Authorize(Roles ="Sales")]
         public IActionResult Index()
         {
             return View();
